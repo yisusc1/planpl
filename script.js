@@ -90,23 +90,25 @@ document.addEventListener('DOMContentLoaded', function () {
     function exportarAExcel() {
         const wb = XLSX.utils.book_new();
         const wsData = [
-            ["PLANIFICACIÓN LUNES 24/02"],
-            ["NUMERO DE ORDEN", "EQUIPO A", "EQUIPO B", "EQUIPO C", "EQUIPO D", "EQUIPO E", "EQUIPO F", "EQUIPO G", "EQUIPO H", "EQUIPO I", "EQUIPO J"]
+            ["Número de Orden", "Nombre y Apellido", "Contacto", "Ubicación (Sector)", "Día Disponible", "Asesor", "Equipo", "Técnico 1", "Técnico 2", "Estatus"]
         ];
 
         clientes.forEach(cliente => {
+            const equipoDiv = document.getElementById(`${cliente.equipo.replace(' ', '-')}Instalaciones`);
+            const tecnico1 = document.getElementById(`${cliente.equipo.replace(' ', '-')}Tecnico1`).value;
+            const tecnico2 = document.getElementById(`${cliente.equipo.replace(' ', '-')}Tecnico2`).value;
+
             const row = [
                 cliente.numeroOrden,
-                cliente.equipo === 'Equipo A' ? cliente.nombre : '',
-                cliente.equipo === 'Equipo B' ? cliente.nombre : '',
-                cliente.equipo === 'Equipo C' ? cliente.nombre : '',
-                cliente.equipo === 'Equipo D' ? cliente.nombre : '',
-                cliente.equipo === 'Equipo E' ? cliente.nombre : '',
-                cliente.equipo === 'Equipo F' ? cliente.nombre : '',
-                cliente.equipo === 'Equipo G' ? cliente.nombre : '',
-                cliente.equipo === 'Equipo H' ? cliente.nombre : '',
-                cliente.equipo === 'Equipo I' ? cliente.nombre : '',
-                cliente.equipo === 'Equipo J' ? cliente.nombre : ''
+                cliente.nombre,
+                cliente.contacto,
+                cliente.ubicacion,
+                cliente.dia,
+                cliente.asesor,
+                cliente.equipo,
+                tecnico1,
+                tecnico2,
+                cliente.estatus
             ];
             wsData.push(row);
         });
